@@ -12,7 +12,9 @@ module SFDataStructures.Dictionaries.MTDictionary (
     empty,
     isEmpty,
     insert,
-    valueOf
+    valueOf,
+    fromListPairs,
+    toListPairs
 ) where
 
 import qualified SFDataStructures.Trees.BST.MAVL as AVL
@@ -29,13 +31,11 @@ data Rel a b = a :->: b
 --
 
 instance (Eq a) => Eq (Rel a b) where
-    (==) :: Eq a => Rel a b -> Rel a b -> Bool
     (k :->: _) == (k' :->: _) = k == k'
 
 --
 
 instance (Ord a) => Ord (Rel a b) where
-    (<=) :: Ord a => Rel a b -> Rel a b -> Bool
     (k :->: _) <= (k' :->: _) = k <= k'
 
 
@@ -117,7 +117,6 @@ isEmpty (D tree) = AVL.isEmpty tree
 
 
 instance (Show a, Show b) => Show (MTDict a b) where
-    show :: (Show a, Show b) => MTDict a b -> String
     show dict
         | isEmpty dict = "MDictionary{}"
         | otherwise = "MDictionary{\n" ++ intercalate "\n" (aux pairs) ++ "\n}"
@@ -131,7 +130,6 @@ instance (Show a, Show b) => Show (MTDict a b) where
 --
 
 instance (Eq a, Eq b) => Eq (MTDict a b) where
-    (==) :: (Eq a, Eq b) => MTDict a b -> MTDict a b -> Bool
     dict == dict' = toListPairs dict == toListPairs dict'
 
 

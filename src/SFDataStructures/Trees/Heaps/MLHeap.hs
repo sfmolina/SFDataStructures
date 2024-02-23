@@ -55,7 +55,7 @@ empty = Empty
 -- | Creates a singleton MLHeap with the given element.
 -- - O(1)
 singleton :: a -> MLHeap a
-singleton elem = Node elem 1 Empty Empty
+singleton element = Node element 1 Empty Empty
 
 --
 
@@ -66,9 +66,9 @@ singleton elem = Node elem 1 Empty Empty
 -- The children are arranged such that the weight of the left child is greater than the weight of the right child.
 -- - O(1)
 node :: a -> MLHeap a -> MLHeap a -> MLHeap a
-node elem h h'
-    | wh > wh'  = Node elem nw h h'
-    | otherwise = Node elem nw h' h
+node element h h'
+    | wh > wh'  = Node element nw h h'
+    | otherwise = Node element nw h' h
     where
         wh  = weight h
         wh' = weight h'
@@ -83,7 +83,7 @@ node elem h h'
 --
 -- - O(log n)
 insert :: (Ord a) => a -> MLHeap a -> MLHeap a
-insert elem = merge (singleton elem)
+insert element = merge (singleton element)
 
 --
 
@@ -114,7 +114,7 @@ fromList = divideAndMerge . map singleton
 merge :: (Ord a) => MLHeap a -> MLHeap a -> MLHeap a
 merge Empty h' = h'
 merge h Empty  = h
-merge h@(Node e w lt rt) h'@(Node e' w' lt' rt')
+merge h@(Node e _ lt rt) h'@(Node e' _ lt' rt')
     | e <= e'   = node e lt (merge rt h')
     | otherwise = node e' lt' (merge rt' h)
 
@@ -124,6 +124,7 @@ merge h@(Node e w lt rt) h'@(Node e' w' lt' rt')
 --   Returns a new MLHeap without the minimum element.
 -- - O(log n)
 delMin :: (Ord a) => MLHeap a -> MLHeap a
+delMin Empty = Empty
 delMin (Node _ _ lt rt) = merge lt rt
 
 

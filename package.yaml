@@ -1,0 +1,68 @@
+name:                SFDataStructures
+version:             2.2.1.0
+github:              "sfmolina/SFDataStructures"
+license:             Apache-2.0
+author:              "Serafín L. Molina"
+maintainer:          "serafin.lopez.molina@gmail.com"
+copyright:           "2024 Serafín (@sfmolina)"
+
+extra-source-files:
+- README.md
+- CHANGELOG.md
+
+# Metadata used when publishing your package
+# synopsis:            Short description of your package
+# category:            Data
+
+# To avoid duplicated efforts in documentation and dealing with the
+# complications of embedding Haddock markup inside cabal files, it is
+# common to point users to the README.md file.
+description:         Please see the README on GitHub at <https://github.com/sfmolina/SFDataStructures#readme>
+
+dependencies:
+- base >= 4.7 && < 5
+
+ghc-options:
+- -Wall
+- -Wcompat
+- -Widentities
+- -Wincomplete-record-updates
+- -Wincomplete-uni-patterns
+- -Wmissing-export-lists
+- -Wmissing-home-modules
+- -Wpartial-fields
+- -Wredundant-constraints
+
+library:
+  exposed-modules:
+    - SFDataStructures.Dictionaries.MTDictionary
+    - SFDataStructures.Queues.MSQueue
+    - SFDataStructures.Stacks.MNStack
+    - SFDataStructures.Trees.BST.MAVL
+    - SFDataStructures.Trees.BST.MBST
+    - SFDataStructures.Trees.Heaps.MLHeap
+  source-dirs: src
+
+executables:
+  SFDataStructures-exe:
+    main:                Main.hs
+    source-dirs:         app
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - SFDataStructures
+
+tests:
+  SFDataStructures-test:
+    main:                Spec.hs
+    source-dirs:
+      - test
+      - src
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - SFDataStructures

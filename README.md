@@ -8,7 +8,6 @@ I love Haskell. When I have got some freetime, I enjoy spending it coding more f
 
 Roadmap
 -------
-Version 2.5:
- - fromList function in MLHeap.
+Version 2.2:
  - Show, Eq, Ord, Functor and Foldable type classes for all the types.
  - Learn more about monads and how they can help improve all types.

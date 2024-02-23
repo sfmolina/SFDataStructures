@@ -8,7 +8,7 @@
 
 
 module SFDataStructures.Queues.MSQueue (
-    MQueue,
+    MSQueue,
     empty,
     enqueue,
     dequeue,
@@ -28,7 +28,7 @@ import Data.List ( intercalate )
 -- DATA DEFINITION --------------------------------------------------------
 
 
-data MQueue a = Q (Stk.MStack a) (Stk.MStack a)
+data MSQueue a = Q (Stk.MNStack a) (Stk.MNStack a)
 
 
 ---------------------------------------------------------------------------
@@ -36,12 +36,12 @@ data MQueue a = Q (Stk.MStack a) (Stk.MStack a)
 -- CONSTRUCTOR ------------------------------------------------------------
 
 
-empty :: MQueue a
+empty :: MSQueue a
 empty = Q Stk.empty Stk.empty
 
 --
 
-mkValid :: Stk.MStack a -> Stk.MStack a -> MQueue a
+mkValid :: Stk.MNStack a -> Stk.MNStack a -> MSQueue a
 mkValid s1 s2
     | Stk.isEmpty s1 = Q s1' s2'
     | otherwise      = Q s1  s2
@@ -56,12 +56,12 @@ mkValid s1 s2
 
 --
 
-enqueue :: a -> MQueue a -> MQueue a
+enqueue :: a -> MSQueue a -> MSQueue a
 enqueue x (Q s1 s2) = mkValid s1 (Stk.push x s2)
 
 --
 
-fromList :: [a] -> MQueue a
+fromList :: [a] -> MSQueue a
 fromList = foldl func empty
     where
         func acc x = enqueue x acc 
@@ -72,7 +72,7 @@ fromList = foldl func empty
 -- TRANSFORMER ------------------------------------------------------------
 
 
-dequeue :: MQueue a -> MQueue a
+dequeue :: MSQueue a -> MSQueue a
 dequeue q@(Q s1 s2)
     | isEmpty q      = error "ERROR: dequeue on empty queue"
     | otherwise      = mkValid (Stk.pop s1) s2
@@ -83,26 +83,26 @@ dequeue q@(Q s1 s2)
 -- SELECTOR ---------------------------------------------------------------
 
 
-isEmpty :: MQueue a -> Bool
-isEmpty (Q s1 s2)
+isEmpty :: MSQueue a -> Bool
+isEmpty (Q s1 _)
     | Stk.isEmpty s1 = True
     | otherwise      = False
 
 --
 
-first :: MQueue a -> a
-first q@(Q s1 s2)
+first :: MSQueue a -> a
+first q@(Q s1 _)
     | isEmpty q      = error "ERROR: first on empty queue"
     | otherwise = Stk.top s1
 
 --
 
-size :: MQueue a -> Int
+size :: MSQueue a -> Int
 size (Q s1 s2) = Stk.size s1 + Stk.size s2
 
 --
 
-toList :: MQueue a -> [a]
+toList :: MSQueue a -> [a]
 toList queue
     | isEmpty queue = []
     | otherwise     = first queue : toList (dequeue queue)
@@ -113,17 +113,15 @@ toList queue
 -- INSTANCES --------------------------------------------------------------
 
 
-instance (Eq a) => Eq (MQueue a) where
-  (==) :: Eq a => MQueue a -> MQueue a -> Bool
-  q == q' = (toList q) == (toList q')
+instance (Eq a) => Eq (MSQueue a) where
+  q == q' = toList q == toList q'
 
 --
 
-instance (Show a) => Show (MQueue a) where
-  show :: Show a => MQueue a -> String
-  show queue = "MQueue( " ++ intercalate " | " (aux queue) ++ " )"
+instance (Show a) => Show (MSQueue a) where
+  show queue = "MSQueue( " ++ intercalate " | " (aux queue) ++ " )"
     where
-        aux :: MQueue a -> [String]
+        aux :: (Show a) => MSQueue a -> [String]
         aux q
             | isEmpty q = []
             | otherwise = show (first q) : aux (dequeue q)
