@@ -1,8 +1,8 @@
 ------------------------------------------------------------------
 --  AUTHOR:    @sfmolina                                        --
 --  Version:   v2                                               --
---  Modified:  23s23                                            --
---   Copyright 2024 Serafín (@sfmolina)                         --
+--  Modified:  23f24                                            --
+--  Copyright 2024 Serafín (@sfmolina)                          --
 ------------------------------------------------------------------
 --[ Implementing an improved basic linear queue with two stacks
 
@@ -123,9 +123,10 @@ instance (Show a) => Show (MQueue a) where
   show :: Show a => MQueue a -> String
   show queue = "MQueue( " ++ intercalate " | " (aux queue) ++ " )"
     where
-     aux q
-        | isEmpty q = []
-        | otherwise = show (first q) : aux (dequeue q)
+        aux :: MQueue a -> [String]
+        aux q
+            | isEmpty q = []
+            | otherwise = show (first q) : aux (dequeue q)
 
 
 ---------------------------------------------------------------------------

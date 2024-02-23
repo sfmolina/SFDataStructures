@@ -1,8 +1,8 @@
 ------------------------------------------------------------------
 --  AUTHOR:    @sfmolina                                        --
 --  Version:   v2                                               --
---  Modified:  24s23                                            --
---   Copyright 2024 Serafín (@sfmolina)                         --
+--  Modified:  23f24                                            --
+--  Copyright 2024 Serafín (@sfmolina)                          --
 ------------------------------------------------------------------
 --[ Implementing a basic Binary Seacrh Tree
 
@@ -18,7 +18,8 @@ module SFDataStructures.Trees.BST.MBST (
     isElem,
     minim,
     maxim,
-    fromList
+    fromList,
+    toListInOrder
 ) where
 
 import qualified SFDataStructures.Trees.BST.InterBST as Inter
@@ -62,6 +63,11 @@ fromList = Inter.fromList function
 delete :: (Ord a) => a -> MBST a -> MBST a
 delete = Inter.delete function
 
+--
+
+toListInOrder :: MBST a -> [a]
+toListInOrder = Inter.toListInOrder
+
 
 ---------------------------------------------------------------------------
 ---------------------------------------------------------------------------
@@ -96,5 +102,11 @@ minim = Inter.minim
 maxim :: MBST a -> Maybe a
 maxim = Inter.maxim
 
+
+---------------------------------------------------------------------------
+---------------------------------------------------------------------------
+-- INSTANCES --------------------------------------------------------------
+
+-- WIP
 
 ---------------------------------------------------------------------------

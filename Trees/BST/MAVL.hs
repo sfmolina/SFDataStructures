@@ -1,8 +1,8 @@
 ------------------------------------------------------------------
 --  AUTHOR:    @sfmolina                                        --
 --  Version:   v2                                               --
---  Modified:  25s23                                            --
---   Copyright 2024 Serafín (@sfmolina)                         --
+--  Modified:  23f24                                            --
+--  Copyright 2024 Serafín (@sfmolina)                          --
 ------------------------------------------------------------------
 --[ Implementing a Balanced Binary Search Tree. It is identical to a BST but with a condition of balance
 
@@ -18,7 +18,8 @@ module SFDataStructures.Trees.BST.MAVL (
     isElem,
     minim,
     maxim,
-    fromList
+    fromList,
+    toListInOrder
 ) where
 
 import qualified SFDataStructures.Trees.BST.InterBST as Inter
@@ -61,6 +62,11 @@ fromList = Inter.fromList function
 
 delete :: (Ord a) => a -> MAVL a -> MAVL a
 delete = Inter.delete function
+
+--
+
+toListInOrder :: MAVL a -> [a]
+toListInOrder = Inter.toListInOrder
 
 
 ---------------------------------------------------------------------------
@@ -133,5 +139,11 @@ minim = Inter.minim
 maxim :: MAVL a -> Maybe a
 maxim = Inter.maxim
 
+
+---------------------------------------------------------------------------
+---------------------------------------------------------------------------
+-- INSTANCES --------------------------------------------------------------
+
+-- WIP
 
 ---------------------------------------------------------------------------

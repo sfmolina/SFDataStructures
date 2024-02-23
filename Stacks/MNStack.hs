@@ -1,7 +1,7 @@
 ------------------------------------------------------------------
 --  AUTHOR:    @sfmolina                                        --
 --  Version:   v2                                               --
---  Modified:  23s23                                            --
+--  Modified:  23f24                                            --
 --   Copyright 2024 Serafín (@sfmolina)                         --
 ------------------------------------------------------------------
 --[ Implementing a basic linear stack with nodes

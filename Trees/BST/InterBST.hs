@@ -1,8 +1,8 @@
 ------------------------------------------------------------------
 --  AUTHOR:    @sfmolina                                        --
 --  Version:   v2                                               --
---  Modified:  24s23                                            --
---   Copyright 2024 Serafín (@sfmolina)                         --
+--  Modified:  23f24                                            --
+--  Copyright 2024 Serafín (@sfmolina)                          --
 ------------------------------------------------------------------
 --[ This is a module with functions shared between MBST
 --[ and MAVL that each one uses diferently
@@ -20,7 +20,8 @@ module SFDataStructures.Trees.BST.InterBST (
     isElem,
     minim,
     maxim,
-    fromList
+    fromList,
+    toListInOrder
 ) where
 
 import Data.Maybe (isJust)
@@ -95,6 +96,12 @@ combine _ Empty rt  = rt
 combine func lt rt  = func x' lt rt'
     where
         (x', rt') = split func rt
+
+--
+
+toListInOrder :: MBST a -> [a]
+toListInOrder Empty = []
+toListInOrder (Node e _ lt rt) = toListInOrder lt ++ [e] ++ toListInOrder rt
 
 
 ---------------------------------------------------------------------------

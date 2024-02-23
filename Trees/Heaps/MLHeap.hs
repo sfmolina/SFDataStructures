@@ -1,8 +1,8 @@
 ------------------------------------------------------------------
 --  AUTHOR:    @sfmolina                                        --
 --  Version:   v2                                               --
---  Modified:  05o23                                            --
---   Copyright 2024 Serafín (@sfmolina)                         --
+--  Modified:  23f24                                            --
+--  Copyright 2024 Serafín (@sfmolina)                          --
 ------------------------------------------------------------------
 --[ Implementing a Leftist Biased Heap
 
