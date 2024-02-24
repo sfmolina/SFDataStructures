@@ -8,7 +8,7 @@
 
 
 module SFDataStructures.Stacks.MNStack (
-    MStack,
+    MNStack,
     empty,
     singleton,
     push,
@@ -30,7 +30,7 @@ import Data.List ( intercalate )
 
 
 type Size = Int
-data MStack a = Empty | Node a Size (MStack a)
+data MNStack a = Empty | Node a Size (MNStack a)
 
 
 ---------------------------------------------------------------------------
@@ -38,23 +38,23 @@ data MStack a = Empty | Node a Size (MStack a)
 -- CONSTRUCTOR ------------------------------------------------------------
 
 
-empty :: MStack a
+empty :: MNStack a
 empty = Empty
 
 --
 
-singleton :: a -> MStack a
+singleton :: a -> MNStack a
 singleton x = Node x 1 Empty
 
 --
 
-push :: a -> MStack a -> MStack a
+push :: a -> MNStack a -> MNStack a
 push x Empty = singleton x
 push x child = Node x (size child + 1) child
 
 --
 
-fromList :: [a] -> MStack a
+fromList :: [a] -> MNStack a
 fromList = foldr push Empty
 
 
@@ -63,7 +63,7 @@ fromList = foldr push Empty
 -- TRANSFORMER ------------------------------------------------------------
 
 
-pop :: MStack a -> MStack a
+pop :: MNStack a -> MNStack a
 pop Empty            = error "ERROR: pop on empty stack"
 pop (Node _ _ child) = child
 
@@ -73,27 +73,27 @@ pop (Node _ _ child) = child
 -- SELECTOR ---------------------------------------------------------------
 
 
-isEmpty :: MStack a -> Bool
+isEmpty :: MNStack a -> Bool
 isEmpty Empty = True
 isEmpty _     = False
 
 --
 
-top :: MStack a -> a
+top :: MNStack a -> a
 top Empty        = error "ERROR: top on empty stack"
 top (Node e _ _) = e
 
 --
 
-size :: MStack a -> Size
+size :: MNStack a -> Size
 size Empty = 0
 size (Node _ s _) = s
 
 --
 
-toList :: MStack a -> [a]
+toList :: MNStack a -> [a]
 toList Empty = []
-toList stack@(Node e _ child) = e : toList child
+toList (Node e _ child) = e : toList child
 
 
 ---------------------------------------------------------------------------
@@ -101,17 +101,15 @@ toList stack@(Node e _ child) = e : toList child
 -- INSTANCES --------------------------------------------------------------
 
 
-instance (Eq a) => Eq (MStack a) where
-  (==) :: (Eq a) => MStack a -> MStack a -> Bool
+instance (Eq a) => Eq (MNStack a) where
   Empty        == Empty          =  True
   (Node e _ c) == (Node e' _ c') =  e==e' && c==c'
   _            == _              =  False
 
 --
 
-instance (Show a) => Show (MStack a) where
-  show :: (Show a) => MStack a -> String
-  show s = "MStack( " ++ intercalate " | " (aux s) ++ " )"
+instance (Show a) => Show (MNStack a) where
+  show stk = "MNStack( " ++ intercalate " | " (aux stk) ++ " )"
     where
      aux Empty        =  []
      aux (Node e _ s) =  show e : aux s

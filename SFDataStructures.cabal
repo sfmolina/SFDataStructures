@@ -1,0 +1,75 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.36.0.
+--
+-- see: https://github.com/sol/hpack
+
+name:           SFDataStructures
+version:        2.2.1.0
+description:    Please see the README on GitHub at <https://github.com/sfmolina/SFDataStructures#readme>
+homepage:       https://github.com/sfmolina/SFDataStructures#readme
+bug-reports:    https://github.com/sfmolina/SFDataStructures/issues
+author:         Serafín L. Molina
+maintainer:     serafin.lopez.molina@gmail.com
+copyright:      2024 Serafín (@sfmolina)
+license:        Apache-2.0
+license-file:   LICENSE
+build-type:     Simple
+extra-source-files:
+    README.md
+    CHANGELOG.md
+
+source-repository head
+  type: git
+  location: https://github.com/sfmolina/SFDataStructures
+
+library
+  exposed-modules:
+      SFDataStructures.Dictionaries.MTDictionary
+      SFDataStructures.Queues.MSQueue
+      SFDataStructures.Stacks.MNStack
+      SFDataStructures.Trees.BST.MAVL
+      SFDataStructures.Trees.BST.MBST
+      SFDataStructures.Trees.Heaps.MLHeap
+  other-modules:
+      SFDataStructures.Trees.BST.InterBST
+      Paths_SFDataStructures
+  hs-source-dirs:
+      src
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
+  build-depends:
+      base >=4.7 && <5
+  default-language: Haskell2010
+
+executable SFDataStructures-exe
+  main-is: Main.hs
+  other-modules:
+      Paths_SFDataStructures
+  hs-source-dirs:
+      app
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      SFDataStructures
+    , base >=4.7 && <5
+  default-language: Haskell2010
+
+test-suite SFDataStructures-test
+  type: exitcode-stdio-1.0
+  main-is: Spec.hs
+  other-modules:
+      SFDataStructures.Dictionaries.MTDictionary
+      SFDataStructures.Queues.MSQueue
+      SFDataStructures.Stacks.MNStack
+      SFDataStructures.Trees.BST.InterBST
+      SFDataStructures.Trees.BST.MAVL
+      SFDataStructures.Trees.BST.MBST
+      SFDataStructures.Trees.Heaps.MLHeap
+      Paths_SFDataStructures
+  hs-source-dirs:
+      test
+      src
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      SFDataStructures
+    , base >=4.7 && <5
+  default-language: Haskell2010

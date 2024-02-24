@@ -75,22 +75,22 @@ toListInOrder = Inter.toListInOrder
 
 
 rightLeaning :: MAVL a -> Bool
-rightLeaning (Inter.Node x h lt rt) = height lt <= height rt
+rightLeaning (Inter.Node _ _ lt rt) = height lt <= height rt
 
 --
 
 leftLeaning :: MAVL a -> Bool
-leftLeaning (Inter.Node x h lt rt) = height lt >= height rt
+leftLeaning (Inter.Node _ _ lt rt) = height lt >= height rt
 
 --
 
 rotR :: MAVL a -> MAVL a
-rotR (Inter.Node e h (Inter.Node elt hlt ltlt rtlt) rt) = Inter.node elt ltlt (Inter.node e rtlt rt)
+rotR (Inter.Node e _ (Inter.Node elt _ ltlt rtlt) rt) = Inter.node elt ltlt (Inter.node e rtlt rt)
 
 --
 
 rotL :: MAVL a -> MAVL a
-rotL (Inter.Node e h lt (Inter.Node ert hrt ltrt rtrt)) = Inter.node ert (Inter.node e lt ltrt) rtrt
+rotL (Inter.Node e _ lt (Inter.Node ert _ ltrt rtrt)) = Inter.node ert (Inter.node e lt ltrt) rtrt
 
 --
 
